@@ -19,6 +19,35 @@ const Dashboard = () => {
         setSavedTitle(title);
         setSavedDescription(description);
     };
+    const handleFetch = async () => {
+        const payload = {
+            username: username,
+            password: password,
+        };
+
+        try {
+            const response = await fetch('http://localhost:3000/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                alert(`✅ Login successful! Response: ${JSON.stringify(data)}`);
+            } else {
+                const errorData = await response.json();
+                alert(`❌ Login failed! Error: ${errorData.msg}`);
+            }
+        } catch (error) {
+            console.error('Error during fetch:', error);
+            alert('❌ An error occurred while making the request.');
+        }
+    };
+    
+
 
     return (
         <div className="signup-wrapper">

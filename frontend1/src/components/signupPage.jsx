@@ -8,7 +8,7 @@ const SignupPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate(); // Get the navigate function
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!username.trim() || !password.trim()) {
       setError('⚠️ Username and password cannot be empty.');
       setShowDiv(false);
@@ -16,23 +16,45 @@ const SignupPage = () => {
     }
 
     setError('');
+    // Prepare the payload
+    const payload = {
+      username: username,
+      password: password,
+    };
 
-    // 👇 Show alert first
-    alert('New User created! JWT token generated!');
+    try {
+      // Make the POST request to the API
+      const response = await fetch('http://localhost:3000/user/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
 
-    // 👇 Then show the div
-    setShowDiv(true);
+      if (response.ok) {
+        const data = await response.json();
+        alert(`✅ New User created! JWT token generated: ${data.token}`);
+        // Show the success div
+        setShowDiv(true);
 
-    console.log('Username:', username);
-    console.log('Password:', password);
-
-    // 👇 Display redirection alert and then redirect
-    setTimeout(() => {
-      alert('Redirecting to dashboard in 3 seconds...');
-      setTimeout(() => {
-        navigate('/dashboard'); // Programmatically navigate to /dashboard
-      }, 3000);
-    }, 0); // Execute this after the alert and state update
+        // Redirect to the dashboard after 3 seconds
+        setTimeout(() => {
+          alert('Redirecting to dashboard in 3 seconds...');
+          setTimeout(() => {
+            navigate('/dashboard'); // Programmatically navigate to /dashboard
+          }, 3000);
+        }, 0);
+      } else {
+        const errorData = await response.json();
+        setError(`❌ Signup failed: ${errorData.msg}`);
+        setShowDiv(false);
+      }
+    } catch (err) {
+      console.error('Error during signup:', err);
+      setError('❌ An error occurred while making the request.');
+      setShowDiv(false);
+    }
   };
 
   return (
