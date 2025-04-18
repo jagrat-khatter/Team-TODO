@@ -1,24 +1,103 @@
-/* App.css */
+/* General body styling */
 body {
   margin: 0;
   display: flex;
   justify-content: center;
- 
+  align-items: center;
   height: 100vh;
   background: linear-gradient(135deg, #203a43, #2c5364);
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
 }
 
+/* Root container styling */
 #root {
   display: flex;
   justify-content: center;
- 
+  align-items: center;
   width: 100%;
 }
 
+/* App container styling */
 .App {
   text-align: center;
   padding: 20px;
-  background: 'rgba(255, 255, 255, 0.05)';
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the todos box */
+.todos-box {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1); /* Light transparent background */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+/* Styling for the todos list */
+.todos-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Styling for individual todo items */
+.todo-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.2); /* Slightly darker background */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+/* Hover effect for todo items */
+.todo-item:hover {
+  transform: scale(1.02);
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Styling for the todo title */
+.todo-title {
+  font-weight: bold;
+  color: #00ffe7; /* Bright cyan */
+  text-shadow: 0 0 5px #00ffe7;
+}
+
+/* Styling for the todo description */
+.todo-description {
+  color: #b3e5fc; /* Light blue */
+}
+
+/* Styling for the todo status */
+.todo-status {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Completed status */
+.todo-status.completed {
+  background-color: #4caf50; /* Green */
+  color: #fff;
+}
+
+/* Pending status */
+.todo-status.pending {
+  background-color: #ff9800; /* Orange */
+  color: #fff;
+}
+
+/* Styling for the "No todos" message */
+.no-todos {
+  color: #ffcccb; /* Light red */
+  font-style: italic;
+  text-align: center;
 }

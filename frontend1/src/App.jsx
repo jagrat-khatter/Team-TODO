@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import SignupPage from './components/signuppage'; // Keep the correct PascalCase import
+import SignupPage from './components/signupPage'; // Keep the correct PascalCase import
 import Dashboard from './components/Dashboard'; // Assuming you have a Dashboard component
 
 function App() {

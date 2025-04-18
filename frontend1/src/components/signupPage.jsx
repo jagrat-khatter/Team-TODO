@@ -35,16 +35,11 @@ const SignupPage = () => {
       if (response.ok) {
         const data = await response.json();
         alert(`✅ New User created! JWT token generated: ${data.token}`);
-        // Show the success div
-        setShowDiv(true);
+        // Save the JWT token to localStorage
+        localStorage.setItem('jwtToken', data.jwt);
 
-        // Redirect to the dashboard after 3 seconds
-        setTimeout(() => {
-          alert('Redirecting to dashboard in 3 seconds...');
-          setTimeout(() => {
-            navigate('/dashboard'); // Programmatically navigate to /dashboard
-          }, 3000);
-        }, 0);
+        // Redirect to the dashboard
+        navigate('/dashboard');
       } else {
         const errorData = await response.json();
         setError(`❌ Signup failed: ${errorData.msg}`);
