@@ -4,14 +4,14 @@ const zod = require('zod');
 const schema1 = zod.string().min(1);
 const {private_key} = require('../secrets.js');
 const jwt = require('jsonwebtoken');
-function userMiddleware(req , res , next)
+async function userMiddleware(req , res , next)
 {
     try
     {const username = req.body.username;
     const password = req.body.password;
     const pass1 = schema1.safeParse(username);
     const pass2 = schema1.safeParse(password);
-    const user = User.findOne({username : username , password : password});
+    const user = await User.findOne({username : username , password : password});
     if(user) {
         throw new Error("Someone already has used this username and password");
     }
