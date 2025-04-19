@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
@@ -7,6 +7,11 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate(); // Get the navigate function
+
+  // Clear the JWT token when the component mounts
+  useEffect(() => {
+    localStorage.removeItem('jwtToken'); // Remove the existing JWT token
+  }, []);
 
   const handleSubmit = async () => {
     if (!username.trim() || !password.trim()) {
